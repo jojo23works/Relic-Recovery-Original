@@ -21,12 +21,14 @@ public class AAMainTeleOp extends LinearOpMode
     private DcMotor motorBackLeft;
     private DcMotor liftMotor;
     private Servo clawServo;
-    public Servo ColorArm;
+    public Servo colorArm;
 
 
     @Override
     public void runOpMode () throws InterruptedException
     {
+        /* Naming each motor, servo, etc.
+        */
         motorFrontRight = hardwareMap.dcMotor.get("FrontRight2");
         motorFrontLeft = hardwareMap.dcMotor.get("FrontLeft3");
         motorBackRight= hardwareMap.dcMotor.get("BackRight0");
@@ -34,7 +36,7 @@ public class AAMainTeleOp extends LinearOpMode
 
         liftMotor = hardwareMap.dcMotor.get("liftMotor");
         clawServo = hardwareMap.servo.get("clawServo");
-        ColorArm = hardwareMap.servo.get("ColorArm");
+        colorArm = hardwareMap.servo.get("ColorArm");
 
 
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -47,21 +49,25 @@ public class AAMainTeleOp extends LinearOpMode
 
         waitForStart();
 
-        ColorArm.setPosition(1);
+        colorArm.setPosition(1);
 
 
         while(opModeIsActive())
         {
-            ColorArm.setPosition(1);
+            colorArm.setPosition(1);
 
             //Driving
 
             /*
             Checks if right bumper is pressed.
-            If so, power is reduced.
+            If so, power is reduced to 25%.
+            Also checks if left bumper is pressed.
+            If so, power is reduced to 75%.
              */
             if(gamepad1.right_bumper){
                 powerMod = 0.25;
+            }elseif(gamepad1.left_bumper){
+                powerMod = 0.75;
             }else{
                 powerMod = 1.0;
             }
