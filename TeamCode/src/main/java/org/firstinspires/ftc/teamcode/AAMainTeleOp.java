@@ -59,9 +59,13 @@ public class AAMainTeleOp extends LinearOpMode
             /*
             Checks if right bumper is pressed.
             If so, power is reduced.
+            Checks if left bumper is pressed.
+            If so, power is reduced.
              */
             if(gamepad1.right_bumper){
                 powerMod = 0.25;
+            }elseif{
+                powerMod = 0.75;
             }else{
                 powerMod = 1.0;
             }
